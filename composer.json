@@ -1,0 +1,21 @@
+{
+    "name": "paulinhosupriano/orm",
+    "description": "A camada de dados é um componente de abstração persistente do seu banco de dados que PDO",
+    "type":"library",
+    "license":"GPL-3.0-or-later",
+    "authors": [
+        {
+            "name":"João Paulo",
+            "email":"paulinhosupriano@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "PaulinhoSupriano\\Orm\\":"src/"
+        }
+    },
+    "require": {
+        "php": ">=7.0",
+        "ext-pdo": "*"
+    }
+}
