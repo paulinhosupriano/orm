@@ -54,7 +54,7 @@ abstract class Orm
     protected ?object $data = null;
 
     /**
-     * DataLayer constructor.
+     * Orm constructor.
      * @param string $entity
      * @param array $required
      * @param string $primary
@@ -62,7 +62,7 @@ abstract class Orm
      */
     public function __construct(
         string $entity,
-        array $required,
+        array $required = [],
         string $primary = 'id',
         bool $timestamps = false,
         array $database = null
@@ -114,6 +114,27 @@ abstract class Orm
         return ($this->data->$name ?? null);
     }
 
+
+    /**
+     * @param array $data
+     * Adicionar campos no Data referente ao Array
+     * @return $this
+     */
+    public function setData(array $data)
+    {
+        foreach ($data as $name => $value) {
+            $this->$name = $value;
+        }
+        return $this;
+    }
+
+    public function pull($name)
+    {
+        if (isset($this->data->$name)) {
+            unset($this->data->$name);
+        }
+    }
+
     /**
      * @param int $mode
      * @return array|null
@@ -146,9 +167,9 @@ abstract class Orm
      * @param string|null $terms
      * @param string|null $params
      * @param string $columns
-     * @return DataLayer
+     * @return Orm
      */
-    public function find(?string $terms = null, ?string $params = null, string $columns = "*"): DataLayer
+    public function find(?string $terms = null, ?string $params = null, string $columns = "*"): Orm
     {
         if ($terms) {
             $this->statement = "SELECT {$columns} FROM {$this->entity} WHERE {$terms}";
@@ -163,18 +184,18 @@ abstract class Orm
     /**
      * @param int $id
      * @param string $columns
-     * @return DataLayer|null
+     * @return Orm|null
      */
-    public function findById(int $id, string $columns = "*"): ?DataLayer
+    public function findById(int $id, string $columns = "*"): ?Orm
     {
         return $this->find("{$this->primary} = :id", "id={$id}", $columns)->fetch();
     }
 
     /**
      * @param string $column
-     * @return DataLayer|null
+     * @return Orm|null
      */
-    public function group(string $column): ?DataLayer
+    public function group(string $column): ?Orm
     {
         $this->group = " GROUP BY {$column}";
         return $this;
@@ -182,9 +203,9 @@ abstract class Orm
 
     /**
      * @param string $columnOrder
-     * @return DataLayer|null
+     * @return Orm|null
      */
-    public function order(string $columnOrder): ?DataLayer
+    public function order(string $columnOrder): ?Orm
     {
         $this->order = " ORDER BY {$columnOrder}";
         return $this;
@@ -192,9 +213,9 @@ abstract class Orm
 
     /**
      * @param int $limit
-     * @return DataLayer|null
+     * @return Orm|null
      */
-    public function limit(int $limit): ?DataLayer
+    public function limit(int $limit): ?Orm
     {
         $this->limit = " LIMIT {$limit}";
         return $this;
@@ -203,9 +224,9 @@ abstract class Orm
     /**
      * @param string $column
      * @param array $values
-     * @return DataLayer
+     * @return Orm
      */
-    public function in(string $column, array $values): DataLayer
+    public function in(string $column, array $values): Orm
     {
         $index = 0;
         $params = array();
@@ -235,9 +256,9 @@ abstract class Orm
 
     /**
      * @param int $offset
-     * @return DataLayer|null
+     * @return Orm|null
      */
-    public function offset(int $offset): ?DataLayer
+    public function offset(int $offset): ?Orm
     {
         $this->offset = " OFFSET {$offset}";
         return $this;
