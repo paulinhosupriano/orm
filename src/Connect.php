@@ -22,7 +22,7 @@ class Connect
      */
     public static function getInstance(array $database = null): ?PDO
     {
-        $dbConf = $database ?? DATA_LAYER_CONFIG;
+        $dbConf = $database ?? ORM_CONFIG;
         $dbName = "{$dbConf["driver"]}-{$dbConf["dbname"]}@{$dbConf["host"]}";
         $dbDsn = $dbConf["driver"] . ":host=" . $dbConf["host"] . ";dbname=" . $dbConf["dbname"] . ";port=" . $dbConf["port"];
 
