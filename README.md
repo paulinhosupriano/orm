@@ -43,7 +43,7 @@ Para começar a usar o Orm precisamos de uma conexão com o seu banco de dados. 
 acesse o [manual de conexões do PDO em PHP.net](https://www.php.net/manual/pt_BR/pdo.drivers.php)
 
 ```php
-const DATA_LAYER_CONFIG = [
+const ORM_CONFIG = [
     "driver" => "mysql",
     "host" => "localhost",
     "port" => "3306",
