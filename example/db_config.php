@@ -1,6 +1,6 @@
 <?php
 
-const DATA_LAYER_CONFIG = [
+const ORM_CONFIG = [
     "driver" => "mysql", 
     "host" => "localhost",
     "port" => "3306",
