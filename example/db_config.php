@@ -15,7 +15,7 @@ const ORM_CONFIG = [
     ]
 ];
 
-//const DATA_LAYER_CONFIG = [
+//const ORM_CONFIG = [
 //    "driver" => "pgsql",
 //    "host" => "localhost",
 //    "port" => "5432",
