@@ -191,6 +191,16 @@ $user = new User();
 $user->campo_da_tabela = "Paulinho";
 $user->last_name = "Supriano";
 $userId = $user->save();
+
+// ou 
+//$user = new User();
+//$user->setData([
+//    'campo_da_tabela' =>'Paulinho',
+//    'last_name' => 'Supriano'
+//]);
+//$userId = $user->save();
+
+
 ```
 
 #### save update
